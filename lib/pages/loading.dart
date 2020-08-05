@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:http/http.dart';
+import 'dart:convert';
 
 class Loading extends StatefulWidget {
   @override
@@ -6,6 +8,30 @@ class Loading extends StatefulWidget {
 }
 
 class _LoadingState extends State<Loading> {
+
+  void getTime() async{
+
+    // Get time request response
+        Response response=await get('http://worldtimeapi.org/api/timezone/Asia/Kolkata');
+        Map data=jsonDecode(response.body);
+
+        String datetime=data['datetime'];
+        String hr=data['utc_offset'].substring(1,3);
+        String mi=data['utc_offset'].substring(4);
+
+//        Create a datetime Object
+          DateTime now=DateTime.parse(datetime);
+          now=now.add(Duration(hours: int.parse(hr),minutes: int.parse(mi)));
+//        print(datetime);
+
+        print(now);
+  }
+  @override
+  void initState() {
+    super.initState();
+    getTime();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
