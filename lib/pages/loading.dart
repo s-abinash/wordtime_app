@@ -30,8 +30,12 @@ class _LoadingState extends State<Loading> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
-        padding: EdgeInsets.all(50.0),
-        child: Text('Loading'),
+        padding: EdgeInsets.fromLTRB(0,80.0,0,0),
+        child: Text('Loading.....',
+              style: TextStyle(
+              fontSize: 25.0,
+              color: Colors.greenAccent),
+      ),
       ),
     );
   }
