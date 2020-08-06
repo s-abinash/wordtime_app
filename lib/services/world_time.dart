@@ -8,6 +8,7 @@ class WorldTime{
   String time; //Time to show
   String flag; //URL for the flag icon
   String url;
+  bool isDayTime; //True if DayTime
   WorldTime({this.location,this.flag,this.url });
   Future<void> getTime() async{
 
@@ -25,8 +26,9 @@ class WorldTime{
       now=now.add(Duration(hours: int.parse(hr),minutes: int.parse(mi)));
 //      time=now.toString();
 
+      isDayTime=now.hour > 6 && now.hour <18;
       time=DateFormat.jm().format(now);
-      time=time.toString();
+
     }
     catch(e){
         time='Could not get time data';

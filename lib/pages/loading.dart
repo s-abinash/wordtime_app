@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:worldtime/services/world_time.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class Loading extends StatefulWidget {
   @override
@@ -8,6 +9,12 @@ class Loading extends StatefulWidget {
 }
 
 class _LoadingState extends State<Loading> {
+
+  //Spinner
+  static const spinner = SpinKitFadingCube(
+    color: Colors.lightGreen,
+    size: 80.0,
+  );
 
   String time='Loading...';
   void setupWorldTime() async
@@ -17,7 +24,8 @@ class _LoadingState extends State<Loading> {
        Navigator.pushReplacementNamed(context,'/home',arguments:
        { 'location': ind.location,
          'flag': ind.flag,
-         'time': ind.time,}
+         'time': ind.time,
+         'isDayTime': ind.isDayTime}
        );
   }
   @override
@@ -29,13 +37,9 @@ class _LoadingState extends State<Loading> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Padding(
-        padding: EdgeInsets.fromLTRB(0,80.0,0,0),
-        child: Text('Loading.....',
-              style: TextStyle(
-              fontSize: 25.0,
-              color: Colors.greenAccent),
-      ),
+      backgroundColor: Colors.black87,
+      body: Center(
+        child: spinner,
       ),
     );
   }
